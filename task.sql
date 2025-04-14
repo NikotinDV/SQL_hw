@@ -1,3 +1,15 @@
+№3 (ничего не выводит)
+SELECT C.CUST_ID, C.CUST_FIRST_NAME, C.CUST_LAST_NAME, C.cust_year_of_birth
+FROM customers C
+JOIN sales S ON C.cust_id = S.cust_id
+JOIN products P ON S.prod_id = P.prod_id
+WHERE C.cust_year_of_birth > 1980 AND P.prod_subcategory IN ('Sweaters - Men', 'Sweaters - Women') AND 
+P.prod_list_price = ( SELECT MIN(prod_list_price)
+    FROM products
+    WHERE prod_subcategory IN ('Sweaters - Men', 'Sweaters - Women')
+  )
+ORDER BY C.cust_id;
+       
 №7
 SELECT C.COUNTRY,
        SUM(S.QUANTITY_SOLD)
